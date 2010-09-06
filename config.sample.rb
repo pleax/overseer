@@ -5,4 +5,6 @@ CONFIG = {
 
   # :access_token => "blah-blah",
   # :access_secret => "blah-blah",
+
+  :poll_interval => 10 * 60,
 }

@@ -2,6 +2,8 @@ require 'boot.rb'
 
 require 'config.rb'
 
+require 'gg.rb'
+
 oauth = Twitter::OAuth.new(CONFIG[:oauth_token], CONFIG[:oauth_secret])
 
 if CONFIG[:access_token].nil? or CONFIG[:access_secret].nil?
@@ -26,4 +28,13 @@ end
 twitter = Twitter::Base.new(oauth)
 
 #twitter.update("He's alive!!")
+
+extractor = GosuGamersExtractor.new
+
+while true do
+  extractor.fetch_new.each do |replay|
+    twitter.update(replay.to_tweet)
+  end
+  sleep CONFIG[:poll_interval]
+end
 
