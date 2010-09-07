@@ -1,6 +1,6 @@
 require 'boot.rb'
 
-require 'config.rb'
+require 'twitter'
 
 require 'gg.rb'
 
