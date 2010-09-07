@@ -37,6 +37,7 @@ while true do
     url = replay.permalink
     url = BitLy.shorten(url) unless CONFIG[:bitly_login].nil? or CONFIG[:bitly_api_key].nil?
     twitter.update("#{replay.to_tweet} #{url}")
+    sleep CONFIG[:post_interval]
   end
   sleep CONFIG[:poll_interval]
 end
