@@ -84,10 +84,8 @@ class GosuGamersReplay
   end
 
   def to_tweet
-    "#{@p1_name} (#{@p1_race}) vs. #{@p2_name} (#{@p2_race}) @ #{@map} #{permalink}"
+    "#{@p1_name} (#{@p1_race}) vs. #{@p2_name} (#{@p2_race}) @ #{@map}"
   end
-
-  private
 
   def permalink
     "http://www.gosugamers.net/starcraft2/replays/#{@id}"

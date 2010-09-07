@@ -3,6 +3,7 @@ require 'boot.rb'
 require 'twitter'
 
 require 'gg.rb'
+require 'bitly.rb'
 
 oauth = Twitter::OAuth.new(CONFIG[:oauth_token], CONFIG[:oauth_secret])
 
@@ -33,7 +34,9 @@ extractor = GosuGamersExtractor.new
 
 while true do
   extractor.fetch_new.each do |replay|
-    twitter.update(replay.to_tweet)
+    url = replay.permalink
+    url = BitLy.shorten(url) unless CONFIG[:bitly_login].nil? or CONFIG[:bitly_api_key].nil?
+    twitter.update("#{replay.to_tweet} #{url}")
   end
   sleep CONFIG[:poll_interval]
 end
