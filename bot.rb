@@ -35,7 +35,7 @@ extractor = GosuGamersExtractor.new
 while true do
   extractor.fetch_new.each do |replay|
     url = replay.permalink
-    url = BitLy.shorten(url) unless CONFIG[:bitly_login].nil? or CONFIG[:bitly_api_key].nil?
+    url = BitLy.shorten(url) if CONFIG.has_bitly_credentials?
     twitter.update("#{replay.to_tweet} #{url}")
     sleep CONFIG[:post_interval]
   end
