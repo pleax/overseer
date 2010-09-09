@@ -7,7 +7,7 @@ require 'bitly.rb'
 
 oauth = Twitter::OAuth.new(CONFIG[:oauth_token], CONFIG[:oauth_secret])
 
-if CONFIG[:access_token].nil? or CONFIG[:access_secret].nil?
+unless CONFIG.has_access_token?
   request_token  = oauth.request_token.token
   request_secret = oauth.request_token.secret
 
