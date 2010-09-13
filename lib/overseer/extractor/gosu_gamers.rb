@@ -1,11 +1,9 @@
-require 'boot'
-
 require 'open-uri'
 require 'hpricot'
 
 require 'set'
 
-class GosuGamersExtractor
+class Overseer::Extractor::GosuGamersExtractor
 
   attr_reader :replays_pool
 
@@ -32,7 +30,7 @@ class GosuGamersExtractor
 
         map = extract_map(replay_node)
 
-        replay = GosuGamersReplay.new(id, p1_name, p1_race, p2_name, p2_race, map)
+        replay = Overseer::Extractor::GosuGamersReplay.new(id, p1_name, p1_race, p2_name, p2_race, map)
 
         @replays_pool << replay
       end
@@ -72,7 +70,7 @@ class GosuGamersExtractor
 
 end
 
-class GosuGamersReplay
+class Overseer::Extractor::GosuGamersReplay
 
   attr_reader :id
 
@@ -92,10 +90,3 @@ class GosuGamersReplay
   end
 
 end
-
-# extractor = GosuGamersExtractor.new
-# extractor.fetch_new
-# extractor.replays_pool.each do |r|
-#   puts r.to_tweet
-# end
-

@@ -1,5 +1,5 @@
 
-CONFIG = {
+Overseer::CONFIG = {
   :oauth_token => 'abcdefg',
   :oauth_secret => 'hijklmnopqrstuvwxyz',
 

@@ -1,9 +1,5 @@
-require 'rubygems'
-require 'bundler/setup'
 
-require 'config.rb'
-
-module ConfigUtils
+module Overseer::ConfigUtils
   def has_access_token?
     not self[:access_token].nil? and not self[:access_secret].nil?
   end
@@ -13,4 +9,3 @@ module ConfigUtils
   end
 end
 
-CONFIG.extend(ConfigUtils)

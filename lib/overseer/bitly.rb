@@ -1,16 +1,14 @@
-require 'boot.rb'
-
 require 'httparty'
 
-module BitLy
+module Overseer::BitLy
   include HTTParty
   base_uri 'api.bit.ly'
 
   class << self
     def shorten(url)
       result = get("/v3/shorten", :query => {
-        "login" => CONFIG[:bitly_login],
-        "apiKey" => CONFIG[:bitly_api_key],
+        "login" => Overseer::CONFIG[:bitly_login],
+        "apiKey" => Overseer::CONFIG[:bitly_api_key],
         "longUrl" => url
       })
       result["data"]["url"]
@@ -20,4 +18,3 @@ module BitLy
   end
 end
 
-# puts BitLy.shorten("http://example.com")
