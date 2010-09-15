@@ -45,15 +45,35 @@ class Overseer::Bot
     while true do
       begin
         @extractor.fetch_new.each do |replay|
-          url = replay.permalink
-          url = Overseer::BitLy.shorten(url) if Overseer::CONFIG.has_bitly_credentials?
-          @twitter.update("#{replay.to_tweet} #{url}")
+          message = format_message(replay)
+          @twitter.update(message)
           sleep Overseer::CONFIG[:post_interval]
         end
       rescue
       end
       sleep Overseer::CONFIG[:poll_interval]
     end
+  end
+
+  def format_message(replay)
+    tokens = []
+
+    tokens << replay.to_tweet
+
+    url = replay.permalink
+    url = Overseer::BitLy.shorten(url) if Overseer::CONFIG.has_bitly_credentials?
+    tokens << url
+
+    hash_tags = []
+    hash_tags += replay.hash_tags
+    hash_tags += Overseer::CONFIG[:hash_tags] if Overseer::CONFIG.has_hash_tags?
+
+    unless hash_tags.empty?
+      hash_tags = hash_tags.map { |t| "\##{t}" }.join(' ')
+      tokens << hash_tags
+    end
+
+    tokens.join(' ')
   end
 
 end

@@ -89,4 +89,8 @@ class Overseer::Extractor::GosuGamersReplay
     "http://www.gosugamers.net/starcraft2/replays/#{@id}"
   end
 
+  def hash_tags
+    [ "gosugamers" ]
+  end
+
 end

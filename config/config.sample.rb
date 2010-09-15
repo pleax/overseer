@@ -11,4 +11,6 @@ Overseer::CONFIG = {
 
   :post_interval => 1,
   :poll_interval => 10 * 60,
+
+  :hash_tags => [ "sc2" ],
 }
