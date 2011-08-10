@@ -42,6 +42,7 @@ class Overseer::Bot
   end
 
   def poll
+    @extractor.fetch_new
     while true do
       begin
         @extractor.fetch_new.each do |replay|
@@ -50,6 +51,9 @@ class Overseer::Bot
           sleep Overseer::CONFIG[:post_interval]
         end
       rescue
+        # pass
+      rescue Timeout::Error
+        # pass
       end
       sleep Overseer::CONFIG[:poll_interval]
     end
